@@ -1,1 +1,1 @@
-# cnn-fys-stk4155
+# Convolutional neural networks and logistic regression
