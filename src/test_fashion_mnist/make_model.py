@@ -8,7 +8,7 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
-from inspect_data import Data
+from data import Data
 from cnn import CNN
 
 
@@ -25,7 +25,7 @@ data.X_test = data.X_test.reshape(-1, 28, 28, 1)
 data.scale(X=1/255)
 
 # Splitting into training and validation data sets (80% and 20% respectively)
-data.make_validation(test_size=0.2)
+data.make_validation_set(val_size=0.2)
 
 
 cnn = CNN([
@@ -43,3 +43,5 @@ cnn = CNN([
     LeakyReLU(alpha=0.1),
     Dense(data.n_classes, activation="softmax")
 ])
+
+cnn.train(data.X_train, data.y_train, validation_data=(data.X_val, data.y_val))
