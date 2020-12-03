@@ -12,21 +12,23 @@ from data import Data
 from cnn import CNN
 
 
-# Load data and inspect
-data = Data(*fashion_mnist.load_data(), onehot=["y_train", "y_test"])
-data.inspect()
+def make_data():
+    # Load data and inspect
+    data = Data(*fashion_mnist.load_data(), onehot=("y_train", "y_test"))
 
+    # Reshaping of input data
+    data.X_train = data.X_train.reshape(-1, 28, 28, 1)
+    data.X_test = data.X_test.reshape(-1, 28, 28, 1)
 
-# Reshaping of input data
-data.X_train = data.X_train.reshape(-1, 28, 28, 1)
-data.X_test = data.X_test.reshape(-1, 28, 28, 1)
+    # Scaling the input data
+    data.scale(X=1/255)
 
-# Scaling the input data
-data.scale(X=1/255)
+    # Splitting into training and validation data sets (80% and 20% respectively)
+    data.make_validation_set(val_size=0.2)
+    
+    return data
 
-# Splitting into training and validation data sets (80% and 20% respectively)
-data.make_validation_set(val_size=0.2)
-
+data = make_data()
 
 cnn = CNN([
     Conv2D(32, kernel_size=(3,3), activation="linear", input_shape=(28, 28, 1), padding="same"),
@@ -45,3 +47,5 @@ cnn = CNN([
 ])
 
 cnn.train(data.X_train, data.y_train, validation_data=(data.X_val, data.y_val))
+
+cnn.dump("cnn1.pickle")
