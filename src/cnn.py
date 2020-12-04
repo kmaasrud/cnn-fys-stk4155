@@ -1,6 +1,7 @@
 import pickle
+import os
 import numpy as np
-from keras.models import Sequential, Input, Model
+from keras.models import Sequential, Input, Model, load_model
 from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 
@@ -33,18 +34,28 @@ class CNN:
             
         return self.model.predict(X)
         
-    def dump(self, path):
+    def dump(self, filename):
         """Saves generated model to a pickled binary file. This can then be loaded again."""
-        with open(path, "wb") as f:
-            pickle.dump(self, f)
+        try:
+            with open(filename + "_history.pickle", "wb") as f:
+                pickle.dump(self.train_history, f)
+        except NameError:
+            pass
+        finally:
+            self.model.save(filename + ".tf")
             
     @classmethod
-    def load(cls, path):
+    def load(cls, filename):
         """Loads a previously saved model and retuns it."""
-        with open(path, "rb") as f:
-            cnn = pickle.load(f)
-            
-        assert cnn == CNN, "Loaded model must be of class CNN"
+        model = load_model(filename + ".tf")
+
+        cnn = CNN([])
+        cnn.model = model 
+        
+        if os.path.isfile(filename + "_history.pickle"):
+            with open(filename + "_history.pickle", "rb") as f:
+                history = pickle.load(f)
+            cnn.train_history = history
         
         return cnn
     

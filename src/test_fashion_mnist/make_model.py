@@ -48,4 +48,4 @@ cnn = CNN([
 
 cnn.train(data.X_train, data.y_train, validation_data=(data.X_val, data.y_val))
 
-cnn.dump("cnn1.pickle")
+cnn.dump("cnn1")
