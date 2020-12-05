@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
 
 class Data:
-    """Class that contains datasets and supports different preprocessing/postprocessing operations on them.
+    """Class that contains the fashion dataset and supports different preprocessing/postprocessing operations on it.
     
     Parameters
     ==========

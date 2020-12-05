@@ -2,13 +2,13 @@ from keras.datasets import fashion_mnist
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
+from data_fashion import Data
 
 import sys, os, inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
-from data import Data
 from cnn import CNN
 
 
