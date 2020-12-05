@@ -1,5 +1,5 @@
 from keras.datasets import fashion_mnist
-from keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Flatten
+from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 
@@ -46,6 +46,6 @@ cnn = CNN([
     Dense(data.n_classes, activation="softmax")
 ])
 
-cnn.train(data.X_train, data.y_train, validation_data=(data.X_val, data.y_val))
+cnn.train(data)
 
-cnn.dump("cnn1")
+cnn.dump("models/fashion_mnist_cnn")
