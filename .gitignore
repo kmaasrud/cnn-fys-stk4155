@@ -137,3 +137,7 @@ dmypy.json
 *.bcf
 *.fdb_latexmk
 *.fls
+
+# Specific
+X_test.npy
+X_train.npy
