@@ -1,5 +1,3 @@
-
-"""
 #Import modules
 import sklearn.linear_model as lm
 from sklearn.utils import shuffle
@@ -21,15 +19,6 @@ from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 
 random.seed(2020)
-
-# load the image
-#image = Image.open('00034.jpg')
-# summarize some details about the image
-#print(image.format)
-#print(image.mode)
-#print(image.size)
-# show the image
-#image.show()
 
 #Defining lists
 train_mask_list = []
@@ -65,9 +54,20 @@ for filename in glob.glob('facemasks/data/test/without_mask/*'): #assuming gif
     test_nomask_list.append(im2)
 
 
+#How to resize imread???
+"""
+fig, axes = plt.subplots(4, 5, figsize=(20, 20))
+ax = axes.ravel()
+images = data.lfw_subset()
+for i in range(20):
+    ax[i].imshow(images[90+i], cmap=plt.cm.gray)
+    ax[i].axis('off')
+fig.tight_layout()
+plt.show()
+"""
 
 #Saving the lists in arrays
-#Might have to concatenate train and test, and split it up into a bigger testset
+"""Might have to concatenate train and test, and split it up into a bigger testset"""
 
 X_train_mask = np.asarray(train_mask_list)
 X_train_nomask = np.asarray(train_nomask_list)
@@ -119,64 +119,3 @@ np.save('X_train.npy', X_train_reshape)
 np.save('X_test.npy', X_test_reshape)
 np.save('t_train.npy', y_train)
 np.save('y_test.npy', y_test)
-"""
-
-#Load the data
-
-X_train=np.load('X_train.npy')
-X_test=np.load('X_test.npy')
-y_train=np.load('y_train.npy')
-y_train=np.load('y_test.npy')
-
-
-#Just a function to get some overview of the dataset
-def info_about_the_data(y_train=y_train, y_test=y_test):
-    articles=['tops', 'trousers', 'pullovers', 'dresss', 'coats', 'sandals',
-    'shirts', 'sneakers', 'bags', 'ankle_boots']
-    article_values=np.zeros(len(articles))
-    y = np.concatenate((y_train, y_test))
-    #Defining the values
-    for i in range(0,len(articles)):
-        article_values[i]=np.count_nonzero(y==i)
-
-    total=np.sum(article_values)
-
-    #If all elements are the same:
-    z=np.count_nonzero(article_values==article_values[1])
-    if z==10:
-        print(f"The dataset includes {article_values[0]} images of each article type, which is {np.around(article_values[0]*100/(total),1)} % of the dataset each")
-    else:
-        for k in range(0,len(articles)):
-            print(f"The dataset includes {article_values[k]} {articles[k]}, which is {np.around(article_values[k]*100/(total),1)} % of the dataset")
-
-    return
-
-#Function that performs logisitc regression using scikit learn
-
-def log_reg_scikit_learn(X_train=X_train, X_test=
-        X_test, y_test=y_test, y_train=y_train):
-
-    #Measuring the the time as in project 2
-    #Using sklearns logisitc regression class
-    start = time.time()
-    log_reg_scikit= lm.LogisticRegression(max_iter=100)
-    log_reg_scikit.fit(X_train, y_train)
-    y_pred=log_reg_scikit.predict(X_test)
-    accuracy_scikit=format(log_reg_scikit.score(X_test,y_test))
-    end = time.time()
-
-    #Making a heatmap of the confusion matrix by distributing all the samples
-    #and calculating the accuracy
-    heatmap(y_test, y_pred, 'mask')
-
-    print(f" Accuracy: logistic regression using the scikit: {accuracy_scikit}")
-    print(f" The scikit function used {end-start} seconds to run")
-
-    return accuracy_scikit
-
-#Remember to print some missclassified images
-
-
-#Calling the functions
-#info_about_the_data()
-#log_reg_scikit_learn()
