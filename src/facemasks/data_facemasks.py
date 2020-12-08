@@ -17,14 +17,14 @@ class Data:
         enc = LabelEncoder()
         self.y_train = to_categorical(enc.fit_transform(self.y_train))
         self.y_test = to_categorical(enc.fit_transform(self.y_test))
-        self.n_labels = len(y_train[0])
+        self.n_labels = 3
 
         self.gen = ImageDataGenerator(
             rotation_range=10, zoom_range=0.10, width_shift_range=0.2, height_shift_range=0.2, horizontal_flip=True, fill_mode="nearest"
         )
 
-    @classmethod
-    def load_from_npy(cls, dir):
+    @staticmethod
+    def load_from_npy(dir):
         X_train = np.load(os.path.join(dir, "X_train.npy"))
         X_test = np.load(os.path.join(dir, "X_test.npy"))
         y_train = np.load(os.path.join(dir, "y_train.npy"))

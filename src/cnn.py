@@ -31,11 +31,11 @@ class CNN:
         try:
             validation_data = (data.X_val, data.y_val)
         except AttributeError:
-            validation_data = None
+            validation_data = (data.X_test, data.y_test)
 
         if from_flow:
             model_train = self.model.fit(
-                data.gen.flow(data.X_train, data.y_train, batch_size=batch_size), epochs=epochs, validation_data=validation_data)
+                data.gen.flow(data.X_train, data.y_train, batch_size=batch_size), steps_per_epoch=len(data.X_train) // batch_size, epochs=epochs, validation_data=validation_data)
         else:
             model_train = self.model.fit(
                 data.X_train, data.y_train, batch_size=batch_size, epochs=epochs, verbose=verbose, validation_data=validation_data
@@ -43,12 +43,15 @@ class CNN:
 
         self.train_accuracy = model_train.history["accuracy"]
         self.train_loss = model_train.history["loss"]
-        self.val_accuracy = model_train.history["val_accuracy"]
-        self.val_loss = model_train.history["val_loss"]
+        try:
+            self.val_accuracy = model_train.history["val_accuracy"]
+            self.val_loss = model_train.history["val_loss"]
+        except KeyError:
+            pass
         
 
     def predict(self, X, eval_data=None):
-        if eval_data:
+        if eval_data.any():
             evaluate = self.model.evaluate(X, eval_data)
             print(f"Prediction loss: {evaluate[0]}")
             print(f"Prediction accuracy: {evaluate[1]}")
@@ -99,6 +102,7 @@ class CNN:
                 )
             )
         )
+
         cnn.model = Model(inputs=mobile.input, outputs=outmodel)
 
         for layer in mobile.layers:

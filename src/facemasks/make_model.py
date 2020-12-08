@@ -11,6 +11,6 @@ data = Data.load_from_npy("data/preprocessed")
 
 cnn = CNN.facemask_model(data.n_labels)
 
-cnn.train(data, from_flow=True)
+cnn.train(data, from_flow=True, batch_size=32, epochs=5)
 
 cnn.dump("models/facemask_cnn")
