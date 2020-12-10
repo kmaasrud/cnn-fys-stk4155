@@ -78,11 +78,11 @@ def heatmap(y_test, y_pred, dataset=None):
 
     #Scikit learn to calculate the confusion matrices
     test_samples=confusion_matrix(y_test, y_pred)
-    test_accuracy=confusion_matrix(y_test, y_pred, normalize='all')*10
+    test_accuracy=confusion_matrix(y_test, y_pred, normalize='true')
     test_accuracy=np.round(test_accuracy, 2)
 
     #Plotting the confusion matrix by number of samples
-    #might change figsize to (len(axis_labels))
+    """
     fig, ax = plt.subplots(figsize = (10, 10))
     sns.heatmap(test_samples, xticklabels=axis_labels, yticklabels=axis_labels, annot=True, ax=ax, cmap="viridis", fmt='g')
     ax.set_ylabel("Solution")
@@ -90,6 +90,7 @@ def heatmap(y_test, y_pred, dataset=None):
     plt.yticks(rotation=0)
     plt.xticks(rotation=90)
     plt.show()
+    """
 
     #Plotting the confusion matrix by accuracy
     fig, ax = plt.subplots(figsize = (10, 10))
