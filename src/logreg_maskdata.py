@@ -5,7 +5,7 @@ from skimage.color import rgb2gray
 import glob
 import numpy as np
 
-size=128
+size=224
 
 #Defining lists
 train_mask_list = []
@@ -45,28 +45,30 @@ for filename in glob.glob('facemasks/data/test/without_mask/*'): #assuming gif
 
 #Saving the lists in arrays
 """Might have to concatenate train and test, and split it up into a bigger testset"""
-X_train_mask = np.asarray(train_mask_list)
-X_train_nomask = np.asarray(train_nomask_list)
-X_test_mask = np.asarray(test_mask_list)
-X_test_nomask = np.asarray(test_nomask_list)
+X_train_mask_original = np.asarray(train_mask_list)
+X_train_nomask_original = np.asarray(train_nomask_list)
+X_test_mask_original = np.asarray(test_mask_list)
+X_test_nomask_original = np.asarray(test_nomask_list)
 
-print(f"Shape of image array: {X_train_mask.shape}")
-
+"""
 X_train_mask= rgb2gray(X_train_mask)
 X_train_nomask = rgb2gray(X_train_nomask)
 X_test_mask = rgb2gray(X_test_mask)
 X_test_nomask= rgb2gray(X_test_nomask)
+"""
 
+"""
 #Resahping the data
 X_train_mask= X_train_mask.reshape(X_train_mask.shape[0],size*size)
 X_train_nomask= X_train_nomask.reshape(X_train_nomask.shape[0],size*size)
 X_test_mask= X_test_mask.reshape(X_test_mask.shape[0],size*size)
 X_test_nomask= X_test_nomask.reshape(X_test_nomask.shape[0],size*size)
+"""
 
-print(f"Shape of image array: {X_test_mask.shape}")
+#print(f"Shape of image array: {X_test_mask.shape}")
 
 
-np.save('X_train_mask.npy', X_train_mask)
-np.save('X_train_nomask.npy', X_train_nomask)
-np.save('X_test_mask.npy', X_test_mask)
-np.save('X_test_nomask.npy', X_test_nomask)
+np.save('X_train_mask.npy', X_train_mask_original)
+np.save('X_train_nomask.npy', X_train_nomask_original)
+np.save('X_test_mask.npy', X_test_mask_original)
+np.save('X_test_nomask.npy', X_test_nomask_original)
