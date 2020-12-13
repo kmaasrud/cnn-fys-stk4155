@@ -2,15 +2,10 @@
 from tensorflow.keras.datasets import fashion_mnist
 import sklearn.linear_model as lm
 import numpy as np
-import time
-
-from utils import heatmap
-
+from utils import heatmap, plot_wrong_predictions_mnist
+import matplotlib.pyplot as plt
 #Setting up the data
 (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
-
-X=np.concatenate((X_train,X_test))
-y=np.concatenate((y_train,y_test))
 
 #Raveling the X-values
 X_train.ravel()
@@ -24,13 +19,6 @@ X_test_reshape= X_test.reshape(X_test.shape[0], X_test.shape[1]*X_test.shape[2])
 
 X_train_scaled=X_train_reshape/np.max(X_train)
 X_test_scaled=X_test_reshape/np.max(X_test)
-
-"""
-# Note to self, when working with colours reshape dataset to have a single channel
-width, height, channels = X_train.shape[1], X_train.shape[2], 1
-X_train = X_train.reshape((X_train.shape[0], width, height, channels))
-X_test = X_test.reshape((X_test.shape[0], width, height, channels))
-"""
 
 #Just a function to get some overview of the dataset
 def info_about_the_data(y_train=y_train, y_test=y_test):
@@ -54,32 +42,30 @@ def info_about_the_data(y_train=y_train, y_test=y_test):
     return
 
 #Function that performs logisitc regression using scikit learn
-
-#Gives 84% sucess rate, might give higher with a different solver for example saga
+#Gives 84% sucess rate
 def log_reg_scikit_learn(X_train=X_train_scaled, X_test=
         X_test_scaled, y_test=y_test, y_train=y_train):
 
-    #Measuring the the time as in project 2
     #Using sklearns logisitc regression class
-    start = time.time()
     log_reg_scikit= lm.LogisticRegression(max_iter=500)
     log_reg_scikit.fit(X_train, y_train)
+    #Predicting using scikit
     y_pred=log_reg_scikit.predict(X_test)
-    accuracy_scikit=format(log_reg_scikit.score(X_test,y_test))
-    end = time.time()
+
+    accuracy_scikit_train=format(log_reg_scikit.score(X_train,y_train))
+    accuracy_scikit_test=format(log_reg_scikit.score(X_test,y_test))
 
     #Making a heatmap of the confusion matrix by distributing all the samples
     #and calculating the accuracy
     heatmap(y_test, y_pred, 'fashion')
 
-    print(f" Accuracy: logistic regression using the scikit: {accuracy_scikit}")
-    print(f" The scikit function used {end-start} seconds to run")
+    print(f" Accuracy: logistic regression using the scikit, train accuracy: {accuracy_scikit_train}")
+    print(f" Accuracy: logistic regression using the scikit, test accuracy {accuracy_scikit_test}")
 
-    return accuracy_scikit
-
-
-
+    return y_pred
 
 #Calling the functions
 info_about_the_data()
-log_reg_scikit_learn()
+y_pred=log_reg_scikit_learn()
+
+plot_wrong_predictions_mnist(y_pred, y_test, X_test)

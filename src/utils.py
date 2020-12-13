@@ -102,3 +102,28 @@ def heatmap(y_test, y_pred, dataset=None):
     plt.show()
 
     return
+
+def plot_wrong_predictions_mnist(y_pred,y_test,X_test):
+    wrong_pred_index=[]
+    index=0
+    for sol, pred in zip(y_test, y_pred):
+        if sol != pred:
+            wrong_pred_index.append(index)
+        index +=1
+
+    articles=['tops', 'trousers', 'pullovers', 'dresss', 'coats', 'sandals',
+                                    'shirts', 'sneakers', 'bags', 'ankle_boots']
+
+    plt.figure(figsize=(10,10))
+    for plot_index, wrong_index in enumerate(wrong_pred_index[0:8]):
+        p = plt.subplot(2,4, plot_index+1) # 4x2 plot
+
+        p.imshow(X_test[wrong_index].reshape(28,28), cmap=plt.cm.gray,
+                interpolation='bilinear')
+        p.set_xticks(()); p.set_yticks(()) # remove ticks
+
+        p.set_title(f'Pred: {articles[y_pred[wrong_index]]} \nSolution: {articles[y_test[wrong_index]]}');
+
+        #fig.tight_layout()
+    plt.show()
+    return
