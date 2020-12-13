@@ -51,10 +51,10 @@ class CNN:
         
 
     def predict(self, X, eval_data=None):
-        if eval_data.any():
-            evaluate = self.model.evaluate(X, eval_data)
-            print(f"Prediction loss: {evaluate[0]}")
-            print(f"Prediction accuracy: {evaluate[1]}")
+        # if len(eval_data):
+        #     evaluate = self.model.evaluate(X, eval_data)
+        #     print(f"Prediction loss: {evaluate[0]}")
+        #     print(f"Prediction accuracy: {evaluate[1]}")
             
         return self.model.predict(X)
         
