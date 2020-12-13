@@ -109,33 +109,31 @@ y_pred=log_reg_scikit_learn()
 
 """
 #Finding the misclassified images
-
-wrong_predictions=[]
-wrong_pred_position=[]
+wrong_pred_mask=[]
+wrong_pred_nomask=[]
 k=0
-while len(wrong_predictions)<4:
+while k<59:
     if y_pred[k]!=y_test[k]:
-        wrong_predictions.append(X_test[k])
+        if y_test[k]==1:
+            wrong_pred_mask.append(k)
+        else:
+            wrong_pred_nomask.append(k)
     k+=1
 
-for i in range(0,len(wrong_predictions)):
-    #wrong_pred_index=np.zeros(len(wrong_predictions))
-    wrong_pred_array=np.where(X_test_grey==wrong_predictions[i])
-    wrong_pred_position.append(wrong_pred_array[0])
-
+plt.rcParams["axes.grid"] = False
 fig, axes = plt.subplots(1, 4, figsize=(6, 6))
 ax = axes.ravel()
-
-print(wrong_pred_position)
-print(wrong_pred_position[1][0])
-ax[0].imshow(X_test_mask[wrong_pred_position[1][0]])
-ax[0].title.set_text(f'Solution=1\nPredicted={y_pred[0]}')
-ax[1].imshow(X_test_orig[wrong_pred_position[1][0]])
-ax[1].title.set_text(f'Solution=1\nPredicted={y_pred[1]}')
-ax[2].imshow(X_test_orig[wrong_pred_position[2][0]])
-ax[2].title.set_text(f'Solution=0\nPredicted={y_pred[2]}')
-ax[3].imshow(X_test_orig[wrong_pred_position[3][0]])
-ax[3].title.set_text(f'Solution=0\nPredicted={y_pred[3]}')
+print(wrong_pred_nomask)
+print(wrong_pred_mask)
+#Printing some of the wrongly predicted samples
+ax[0].imshow(X_test_mask[wrong_pred_mask[2]])
+ax[0].title.set_text(f'Solution={y_test_mask[wrong_pred_mask[2]]}\nPredicted={y_pred[wrong_pred_mask[2]]}')
+ax[1].imshow(X_test_mask[wrong_pred_mask[3]])
+ax[1].title.set_text(f'Solution={y_test_mask[wrong_pred_mask[3]]}\nPredicted={y_pred[wrong_pred_mask[3]]}')
+ax[2].imshow(X_test_nomask[wrong_pred_nomask[0]-len(y_test_mask)])
+ax[2].title.set_text(f'Solution={y_test_nomask[wrong_pred_nomask[0]-len(wrong_pred_mask)]}\nPredicted={y_pred[wrong_pred_nomask[0]-len(wrong_pred_mask)]}')
+ax[3].imshow(X_test_mask[wrong_pred_mask[20]])
+ax[3].title.set_text(f'Solution={y_test_mask[wrong_pred_mask[20]]}\nPredicted={y_pred[wrong_pred_mask[20]]}')
 
 fig.tight_layout()
 plt.show()
