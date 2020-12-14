@@ -11,7 +11,6 @@ sys.path.insert(0, parentdir)
 
 from cnn import CNN
 
-
 def make_data():
     # Load data and inspect
     data = Data(*fashion_mnist.load_data(), onehot=("y_train", "y_test"))
@@ -28,24 +27,25 @@ def make_data():
     
     return data
 
-data = make_data()
+if __name__ == "__main__":
+    data = make_data()
 
-cnn = CNN([
-    Conv2D(32, kernel_size=(3,3), activation="linear", input_shape=(28, 28, 1), padding="same"),
-    LeakyReLU(alpha=0.1),
-    MaxPooling2D((2, 2), padding="same"),
-    Conv2D(64, (3, 3), activation="linear", padding="same"),
-    LeakyReLU(alpha=0.1),
-    MaxPooling2D(pool_size=(2, 2), padding="same"),
-    Conv2D(128, (3, 3), activation="linear", padding="same"),
-    LeakyReLU(alpha=0.1),
-    MaxPooling2D(pool_size=(2, 2), padding="same"),
-    Flatten(),
-    Dense(128, activation="linear"),
-    LeakyReLU(alpha=0.1),
-    Dense(data.n_classes, activation="softmax")
-])
+    cnn = CNN([
+        Conv2D(32, kernel_size=(3,3), activation="linear", input_shape=(28, 28, 1), padding="same"),
+        LeakyReLU(alpha=0.1),
+        MaxPooling2D((2, 2), padding="same"),
+        Conv2D(64, (3, 3), activation="linear", padding="same"),
+        LeakyReLU(alpha=0.1),
+        MaxPooling2D(pool_size=(2, 2), padding="same"),
+        Conv2D(128, (3, 3), activation="linear", padding="same"),
+        LeakyReLU(alpha=0.1),
+        MaxPooling2D(pool_size=(2, 2), padding="same"),
+        Flatten(),
+        Dense(128, activation="linear"),
+        LeakyReLU(alpha=0.1),
+        Dense(data.n_classes, activation="softmax")
+    ])
 
-cnn.train(data)
+    cnn.train(data)
 
-cnn.dump("models/fashion_mnist_cnn")
+    cnn.dump("models/fashion_mnist_cnn")

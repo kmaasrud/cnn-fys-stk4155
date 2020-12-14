@@ -7,6 +7,7 @@ from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 from tensorflow.keras.applications import MobileNetV2
 
+
 class CNN:
     """Wrapper class over the tf.keras.Sequential class.
     Makes interactions easier for our purposes and implements some extra practical features."""

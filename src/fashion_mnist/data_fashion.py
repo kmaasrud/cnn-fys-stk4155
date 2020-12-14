@@ -55,6 +55,31 @@ class Data:
         self.n_training = self.X_train.shape[0]
         self.n_validation = self.X_val.shape[0]
         
+        
+    def postprocess(self, predictions):
+        data = []
+        for array in predictions:
+            max_val = 0
+            for i, val in enumerate(array):
+                if val > max_val:
+                    max_val = val
+                    max_i = i
+
+            data.append(self.classes[max_i])
+
+        return data
+
+
+    def accuracy(self, predictions, print_report=False):
+        s = 0
+        for prediction, real in zip(predictions, self.y_test_orig):
+            if print_report:
+                print(f"Prediction:\t{prediction}\nReal:\t\t{real}\n")
+            s += int(prediction == real)
+            
+        return s / len(predictions)
+        
+
     def __str__(self):
         return f"""==========================================================================
 | Shape of X's:\t\t\t\t | \t{self.X_shape}
