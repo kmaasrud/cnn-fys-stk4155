@@ -13,7 +13,7 @@ from cnn import CNN
 
 data = Data.load_from_imgs("real_pics")
 
-cnn = CNN.load("models/facemask_cnn")
+cnn = CNN.load("models/facemask_cnn2")
 
 predictions = data.postprocess(cnn.model.predict(data.X_test))
 

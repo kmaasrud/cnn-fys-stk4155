@@ -9,7 +9,7 @@ from cnn import CNN
 
 OUT_DIR = os.path.join(os.path.dirname(parentdir), "doc/assets")
 
-cnn = CNN.load("models/facemask_cnn")
+cnn = CNN.load("models/facemask_cnn2")
 
 epoch = list(range(len(cnn.train_loss)))
 

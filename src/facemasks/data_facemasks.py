@@ -5,6 +5,7 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img, ImageDa
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
 
 class Data:
     def __init__(self, X_train, X_test, y_train, y_test):
@@ -27,6 +28,12 @@ class Data:
         )
         
 
+    def make_validation_set(self, val_size=0.25):
+        self.X_train, self.X_val, self.y_train, self.y_val = train_test_split(self.X_train, self.y_train, test_size=val_size)
+        self.n_training = self.X_train.shape[0]
+        self.n_validation = self.X_val.shape[0]
+
+
     def postprocess(self, predictions):
         prediction_objects = []
         for array in predictions:
@@ -47,10 +54,10 @@ class Data:
 
     @staticmethod
     def load_from_npy(dir):
-        X_train = np.load(os.path.join(dir, "X_train.npy"))
-        X_test = np.load(os.path.join(dir, "X_test.npy"))
-        y_train = np.load(os.path.join(dir, "y_train.npy"))
-        y_test = np.load(os.path.join(dir, "y_test.npy"))
+        X = np.concatenate((np.load(os.path.join(dir, "X_train.npy")), np.load(os.path.join(dir, "X_test.npy"))))
+        y = np.concatenate((np.load(os.path.join(dir, "y_train.npy")), np.load(os.path.join(dir, "y_test.npy"))))
+        
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
         
         return Data(X_train, X_test, y_train, y_test)
 
