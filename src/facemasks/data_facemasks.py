@@ -10,10 +10,9 @@ class Data:
     def __init__(self, X_train, X_test, y_train, y_test):
         self.enc = LabelEncoder().fit(y_test)
 
-        if X_train:
+        if type(X_train) == np.ndarray:
             self.X_train = X_train
             self.y_train = y_train
-            self.train_enc = LabelEncoder.fit(self.y_train)
             self.y_train = to_categorical(self.enc.transform(self.y_train))
 
         self.X_test = X_test
@@ -78,10 +77,10 @@ class Data:
 
     @staticmethod
     def save_from_imgs(data_dir):
-        img_paths = []
-        X = []
-        y = []
         for set_type in ["train", "test"]:
+            img_paths = []
+            X = []
+            y = []
             for dirname, dirs, filenames in os.walk(os.path.join(data_dir, set_type)):
                 for filename in filenames:
                     if os.path.splitext(filename)[1] in [".png", ".jpg", ".jpeg"]:
