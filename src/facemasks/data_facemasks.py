@@ -63,7 +63,7 @@ class Data:
 
 
     @classmethod
-    def load_from_imgs(cls, data_dir):
+    def load_from_imgs(cls, data_dir, return_img_paths=True):
         img_paths = []
         data = {}
         X = []
@@ -78,6 +78,9 @@ class Data:
             img = preprocess_input(img_to_array(load_img(img_path, target_size=(224, 224))))
             X.append(img)
             y.append(label)
+            
+        if return_img_paths:
+            return cls(None, np.array(X), None, np.array(y)), img_paths
             
         return cls(None, np.array(X), None, np.array(y))
                 
