@@ -1,0 +1,25 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Discussion}
+
+\subsection{Fashion-MNIST}
+\subsubsection{Logistic regression}
+When using logistic regression on the fashion mnist, the accuracy ended up with a decent 84\% score on the testset. This is quiet good considering that logistic regression is a regression method. Having a look at the confusion matrix in figure \ref{fig:logreg_mnist_cm}, it is easy to see which articles was the hardest to classify, and which ones the easiest. The correct predictions is, as mentioned in the theory along the diagonal. The easiest articles to recognize was the trousers with an accuracy of 96\%, boots with an accuracy of 95\%, and sneakers, bags and sandals with accuracy's of 94-, 93- and 92\% respectively. The most difficult one to classify was without doubt the shirts with an accuracy of 57\%. Followed by pullovers and coats with 74- and 76\% accuracy respectively. The reason the model struggled some bit to classify shirts is most certain because shirts resembles tops, pullovers and coats a lot, which is backed up by the confusion matrix which shows that about 35\% of the shirts were predicted into those three categories.
+
+\subsubsection{CNN}
+
+\subsection{Facemask detection}
+\subsubsection{Logistic regression}
+Applying the logistic regression model on the facemask detection dataset, ended up with a disappointing accuracy of 48\% on the testset. This is a bit worse than expected due to the fact that making the model aimlessly guess which category to label the images, would give a couple of percentages higher accuracy. The model having some difficulties learning, is probably due to the facemask pictures being a bit too complex with every picture having a new face, in a new location with different objects in the picture. Having a look at the confusion matrix in figure \ref{fig:logreg_facemask_cm}, it is easy to notice that the model is predicting most of the images as images containing masks, with 73\% of the testset predicted as being an image containing a mask. Because the model is predicting most of the pictures as masks, it managed to predict 70\% of the masks correct, while it only predicted about 30\% of the images without a mask correctly.
+
+Moving over to figure \ref{fig:logreg_real_pics}, which shows the predictions of real life pictures taken by us and predicted by the model, shows that the model managed to guess 3/4 of the images which is impressing, but can't really be taken seriously due to the fact that it was only tested on four photos, in addition the four photos were really simplistic being a front photo with a plane background.
+
+
+\subsubsection{CNN}
+\subsection{Logistic regression vs. CNN}
+
+
+
+\end{document}
