@@ -1,0 +1,1 @@
+We tested different ways of splitting the dataset into a training and testing set. This has led to two trained models: `facemask_cnn` and `facemask_cnn2`. `facemask_cnn2` is the one being used, and `facemask_cnn` is only kept to ensure the historical integrity of the repo.
