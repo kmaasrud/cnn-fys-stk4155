@@ -11,22 +11,10 @@ sys.path.insert(0, parentdir)
 
 from cnn import CNN
 
-# if sys.argv[1]:
-#     img_path = sys.argv[1]
-# else:
-#     img_path = input("Insert path to directory of images you want to assess: ")
-
-# imgs = []
-# for dirname, dirs, filenames in os.walk(img_path):
-#     for filename in filenames:
-#         if os.path.splitext(filename)[1] in [".png", ".jpg", ".jpeg"]:
-#             img = preprocess_input(img_to_array(load_img(os.path.join(dirname, filename), target_size=(224, 224))))
-#             imgs.append(np.array(img))
-
-data = Data.load_from_npy("data/preprocessed")
+data = Data.load_from_imgs("real_pics")
 
 cnn = CNN.load("models/facemask_cnn")
 
-prediction = cnn.model.predict(data.X_test[:50], batch_size=50)
+predictions = data.postprocess(cnn.model.predict(data.X_test))
 
-print(f"\nPredicted value: {prediction}")
+data.accuracy(predictions, print_report=True)
