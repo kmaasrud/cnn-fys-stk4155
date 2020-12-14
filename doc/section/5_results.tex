@@ -42,6 +42,21 @@ Some of the missclassified pictures from using logistic regression on the fashio
 
 \subsection{Face mask detection}
 \subsubsection{CNN}
+% Some text about training history. The validation history is utter bullshit, but that is hopefully fixed soon.
+
+\begin{figure}[H]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.1\linewidth]{doc/assets/facemasks_train_history.png}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.1\linewidth]{doc/assets/facemasks_val_history.png}
+    \end{subfigure}
+    \caption{History of loss and accuracy of the training and validation set as they develop through the epochs.}
+    \label{fig:facemasks_cnn_history}
+\end{figure}
+
 After training on the dataset, our model classified a collection of real pictures of people with facemasks. 
 
 In addition to using the supplied testing set, we snapped a couple of pictures of ourselves to test the network on. Here are some examples and the results the network provided.
