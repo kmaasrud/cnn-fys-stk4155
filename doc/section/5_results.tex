@@ -1,0 +1,57 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Results}
+
+\subsection{Fashion-MNIST}
+\subsubsection{CNN}
+\subsubsection{Logistic regression}
+The logistic regression model was applied on the mnist fashion dataset. The logistic regression resulted in an accuracy of 84\% when applied to the test set. The accuracy from the train set was 88\%. The confusion matrix which shows the accuracy of each article can be seen in figure \ref{fig:logreg_mnist_cm}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{doc/assets/logreg_fashion_heatmap_accuracy84.png}
+    \caption{The confusion matrix after using logistic regression to classify the fashion mnist. The matrix shows the accuracy of the model within each predicted class}
+    \label{fig:logreg_mnist_cm}
+\end{figure}
+
+Some of the missclassified pictures from using logistic regression on the fashion mnist dataset can be seen in figure \ref{fig:missclassified_logreg_fashion}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{doc/assets/logreg_missclassified_fasion.png}
+    \caption{Some miss classified images from the mnist fashion dataset, predicted by logistic regression}
+    \label{fig:missclassified_logreg_fashion}
+\end{figure}
+
+\subsection{Face mask detection}
+\subsubsection{CNN}
+\subsubsection{Logistic regression}
+The logistic regression model was applied on the face mask dataset. The logistic regression resulted with an accuracy score of 48\% when applied to the test set. The confusion matrix which shows the accuracy of the predicted classifications can be seen in figure \ref{fig:logreg_facemask_cm}. Some of the miss classified images can be seen in figure \ref{fig:missclassified_logreg_facemask}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{doc/assets/logreg_mask_heatmap_accuracy48_original_testset.png}
+    \caption{The confusion matrix after using logistic regression to classify the face mask detection dataset. The matrix shows the accuracy of the model within each predicted class}
+    \label{fig:logreg_facemask_cm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{doc/assets/logreg_missclassified_facemask.png}
+    \caption{Some miss classified images from the facemask detection dataset, predicted by logistic regression}
+    \label{fig:missclassified_logreg_facemask}
+\end{figure}
+
+
+Since the dataset consisted of images of people with facemasks edited on instead of wearing real physical masks, the model was tested on a few pictures taken by ourself to check how the model performed after training. The results can be seen in figure \ref{fig:logreg_real_pics}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{doc/assets/log_reg_real_pics.png}
+    \caption{Pictures taken by ourselves to test the model. The model predicted three out of four pictures correct}
+    \label{fig:logreg_real_pics}
+\end{figure}
+
+
+\end{document}
