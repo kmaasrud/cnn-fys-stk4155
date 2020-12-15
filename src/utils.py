@@ -94,6 +94,12 @@ def heatmap(y_test, y_pred, dataset=None):
 
     #Plotting the confusion matrix by accuracy
     fig, ax = plt.subplots(figsize = (10, 10))
+    params = {'legend.fontsize': 'x-large',
+             'axes.labelsize': 'x-large',
+             'axes.titlesize':'x-large'}
+    plt.rcParams.update(params)
+    plt.rc('xtick', labelsize=15)
+    plt.rc('ytick', labelsize=15)
     sns.heatmap(test_accuracy, xticklabels=axis_labels, yticklabels=axis_labels, annot=True, ax=ax, cmap="viridis")
     ax.set_ylabel("Solution")
     ax.set_xlabel("Prediction")
@@ -115,6 +121,11 @@ def plot_wrong_predictions_mnist(y_pred,y_test,X_test):
                                     'shirts', 'sneakers', 'bags', 'ankle_boots']
 
     plt.figure(figsize=(10,10))
+    params = {'legend.fontsize': 'x-large',
+             'axes.labelsize': 'x-large',
+             'axes.titlesize':'x-large'}
+    plt.rcParams.update(params)
+
     for plot_index, wrong_index in enumerate(wrong_pred_index[0:8]):
         p = plt.subplot(2,4, plot_index+1) # 4x2 plot
 

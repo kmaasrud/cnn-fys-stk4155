@@ -121,10 +121,12 @@ while k<59:
     k+=1
 
 plt.rcParams["axes.grid"] = False
-fig, axes = plt.subplots(1, 4, figsize=(6, 6))
+fig, axes = plt.subplots(1, 4, figsize=(10, 10))
 ax = axes.ravel()
-print(wrong_pred_nomask)
-print(wrong_pred_mask)
+params = {'legend.fontsize': 'x-large',
+         'axes.labelsize': 'x-large',
+         'axes.titlesize':'x-large'}
+plt.rcParams.update(params)
 #Printing some of the wrongly predicted samples
 ax[0].imshow(X_test_mask[wrong_pred_mask[2]])
 ax[0].title.set_text(f'Solution={y_test_mask[wrong_pred_mask[2]]}\nPredicted={y_pred[wrong_pred_mask[2]]}')

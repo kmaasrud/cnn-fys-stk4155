@@ -76,9 +76,14 @@ def log_reg_scikit_learn(X_train, X_test, y_test, y_train):
 y_pred=log_reg_scikit_learn(X_train, X_test_pics, y_test_pics,y_train)
 
 
-fig, axes = plt.subplots(1, 4, figsize=(6, 6))
+#plt.rc('title', labelsize=13)
+plt.rcParams["axes.grid"] = False
+fig, axes = plt.subplots(1, 4, figsize=(10, 10))
 ax = axes.ravel()
-
+params = {'legend.fontsize': 'x-large',
+         'axes.labelsize': 'x-large',
+         'axes.titlesize':'x-large'}
+plt.rcParams.update(params)
 ax[0].imshow(real_pic_mask_list[0])
 ax[0].title.set_text(f'Solution=1\nPredicted={y_pred[0]}')
 ax[1].imshow(real_pic_mask_list[1])
