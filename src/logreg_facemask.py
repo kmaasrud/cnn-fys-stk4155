@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from utils import heatmap, accuracy
 
 #Original test set=0, new larger testset=1
-original_test_set=0
+original_test_set=1
 
 #Load the data
 X_train_mask=np.load('X_train_mask.npy')
@@ -43,7 +43,7 @@ if original_test_set==1:
     X, y = shuffle(X, y)
 
     #Splitting up into a test and training set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 else:
     X_train_grey= rgb2gray(X_train_orig)
     X_test_grey = rgb2gray(X_test_orig)
