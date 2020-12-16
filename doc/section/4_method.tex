@@ -9,7 +9,7 @@ The fashion-MNIST is a dataset of Zalando's article images -- consisting of a tr
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.8\textwidth]{doc/fig/example_fashion_mnist.png}
+    \includegraphics[width=0.8\textwidth]{fig/example_fashion_mnist.png}
     \caption{A sample of the fashion-MNIST dataset.}
     \label{fig:ex_fashion_MNIST}
 \end{figure}
@@ -41,15 +41,15 @@ The facemask dataset is a dataset consisting of approximately 4000 RGB images of
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{doc/assets/face_mask_samples.png}
-    \caption{A sample of the facemask detection dataset. The predicted value 1=mask, while the predicted value 0=no mask.}
+    \includegraphics[width=0.8\textwidth]{assets/face_mask_samples.png}
+    \caption{A sample of the facemask detection dataset. The value 1=mask, while the value 0=no mask.}
     \label{fig:ex_facemask_set}
 \end{figure}
 
 \subsection{Logistic regression}
 The implementation of the logistic regression is implemented pretty straight forward. From project 2 \cite{project2}, it was shown that scikit learn had the ability to provide predictions using logistic regression much faster, and a bit more accurate than a self written SGD algorithm. The logistic regression in this article therefore revolves around scikit learn's logistic regression library. Beside using scikit learn's machine learning library, scikit learn's image processing library which is as the name says, an image processing library. This well known library is quite useful when dealing with images, and was implemented when processing the images from the facemask dataset.
 
-The facemask implementation is done by resizing the images into sizes of 224x224 to reduce the computer effort. Then the images is scaled by dividing the pixels by the maximum pixel value, and sorted into arrays. Then removing the present colours by transforming the images into grayscale. This way there is only one colour channel to work with, instead of the original three. The mnist dataset doesn't need as much prework as the facemask dataset except scaling the data.
+The facemask implementation is done by resizing the images into sizes of 224x224 to reduce the computer effort. Then the images is scaled by dividing the pixels by the maximum pixel value, and sorted into arrays. Then removing the presence of colours by transforming the images into grayscale. This way there is only one colour channel to work with, instead of the original three. The mnist dataset doesn't need as much prework as the facemask dataset except scaling the data.
 
 After the data is ready, the pixel values are sent into the logistic regression function and trained. After the training is done, the fitting and predicting is ready to be set in motion. The predicted response vector for the datasets is retured, which then can be used to calculate the accuracy.
 
