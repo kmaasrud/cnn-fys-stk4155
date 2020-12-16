@@ -1,1 +1,3 @@
 Dataset by Pasquale De Vita, found [here](https://www.kaggle.com/pasqualedevita/facemaskdetection).
+
+The dataset is split into the folders `test` and `train`. We do not use these as testing and training sets respectively, as `test` contains real pictures, while `train` has facemasks photoshopped in. To get a more accurate training session and have a larger test set, we first load all pictures and then split them in a 8:2 distribution with the `train_test_split` function provided by `scikit-learn`.
