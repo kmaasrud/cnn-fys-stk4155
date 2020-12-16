@@ -27,7 +27,6 @@ print(f"Test set accuracy: {data.accuracy(predictions)}")
 
 data, img_paths = Data.load_from_imgs("real_pics", return_img_paths=True)
 predictions = data.postprocess(cnn.predict(data.X_test))
-print(f"Real pictures accuracy: {data.accuracy(predictions)}")
 
 fig, axes = plt.subplots(1, 4, figsize=(6, 6))
 ax = axes.ravel()
