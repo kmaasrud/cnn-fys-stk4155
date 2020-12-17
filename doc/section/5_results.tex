@@ -67,7 +67,7 @@ Some of the missclassified pictures from using logistic regression on the fashio
 
 \subsection{Face mask detection}
 \subsubsection{CNN}
-% Some text about training history. The validation history is utter bullshit, but that is hopefully fixed soon.
+With fairly few training epochs done, the training session had a pretty consistently low loss and high accuracy throughout. The validation set shows the same progression, as shown in figure \ref{fig:facemasks_cnn_history}.
 
 \begin{figure}[H]
     \begin{subfigure}{.5\textwidth}
@@ -93,18 +93,18 @@ After training on the training dataset, our model got an accuracy of approximate
 
 
 \subsubsection{Logistic regression}
-The logistic regression model was applied on the face mask dataset. The logistic regression resulted with an accuracy score of 48\% when applied to the test set. The confusion matrix which shows the accuracy of the predicted classifications can be seen in figure \ref{fig:logreg_facemask_cm}. Some of the miss classified images can be seen in figure \ref{fig:missclassified_logreg_facemask}
+The logistic regression model was applied on the face mask dataset. The logistic regression resulted with an accuracy score of 95\% when applied to the test set. The confusion matrix which shows the accuracy of the predicted classifications can be seen in figure \ref{fig:logreg_facemask_cm}. Some of the miss classified images can be seen in figure \ref{fig:missclassified_logreg_facemask}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{assets/logreg_mask_heatmap_accuracy48_original_testset.png}
+    \includegraphics[width=0.8\textwidth]{assets/logreg_mask_heatmap_accuracy95.png}
     \caption{The confusion matrix after using logistic regression to classify the face mask detection dataset. The matrix shows the accuracy of the model within each predicted class}
     \label{fig:logreg_facemask_cm}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{assets/logreg_missclassified_facemask.png}
+    \includegraphics[width=1\textwidth]{assets/logreg_missclassified_facemask.png}
     \caption{Some miss classified images from the facemask detection dataset, predicted by logistic regression}
     \label{fig:missclassified_logreg_facemask}
 \end{figure}
@@ -114,7 +114,7 @@ Since the dataset consisted of images of people with facemasks edited on instead
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{assets/log_reg_real_pics.png}
+    \includegraphics[width=1\textwidth]{assets/log_reg_real_pics.png}
     \caption{Pictures taken by ourselves to test the model. The model predicted three out of four pictures correct}
     \label{fig:logreg_real_pics}
 \end{figure}
